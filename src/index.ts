@@ -5,15 +5,15 @@ import PostalMime from "postal-mime";
 
 export default {
     async email(message, env: Env, ctx) {
-        const BLACK_LIST = [
+        const BLOCK_LIST = [
             "newsletter@abema.tv",
             "no-reply@newsletter.abema.tv",
         ];
 
         const email = await new PostalMime().parse(message.raw);
 
-        for (const black of BLACK_LIST) {
-            if (email.from.address.endsWith(black)) {
+        for (const block of BLOCK_LIST) {
+            if (email.from.address.endsWith(block)) {
                 const msg = createMimeMessage();
                 msg.setHeader("In-Reply-To", message.headers.get("Message-ID"));
                 msg.setSender({ name: "Please block me!", addr: message.to });
@@ -49,7 +49,7 @@ https://x.com/pi_mannokanzume`,
             JSON.stringify({
                 username: message.to
                     .toLowerCase()
-                    .replace("discord", "dis#ord"),
+                    .replaceAll("discord", "dis#ord"),
                 content: `\`from: ${email.from.name} (${email.from.address})\`
 ${email.subject || "件名なし"}
 
