@@ -1,6 +1,6 @@
 # Cloudflare Email Worker(CF Workers)でDiscord Webhookにメール内容を送れるプログラム
 
-互換性フラグはWebからは設定できないので、Wrangler Cliが必須
+最近互換性フラグがWebからでも設定できるようになったが、コードのコンパイルにWrangler Cliが必要
 
 `wrangler.toml`
 ```toml
